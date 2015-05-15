@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="phonecatApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Angular Demo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet" media="all">
+    <link href="style/style.css" rel="stylesheet" media="all">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+    <div>
+        <h1>{{title}}</h1>
+        <input type="text" ng-model="query"/>
+        <ul>
+            <li ng-repeat="phone in filterFun = (phones | filter:{name:query, status:true})">
+                <span>{{phone.name}}</span>
+                <p>{{phone.snippet}}</p>
+            </li>
+        </ul>
+        <p>Общее количество телефонов: {{filterFun.length}}</p>
+    </div>
+    <table>
+        <tr ng-repeat="i in [0,1,2,3,4,5,6,7]">
+            <td>
+                {{i+1}}
+            </td>
+        </tr>
+    </table>
+    <hr/>
+    <h2>Filter</h2>
+    <h4>Date</h4>
+    {{today | date: 'mm/dd/yyyy'}}
+    <hr/>
+    <ul>
+        <li>1. Currency {{234| currency}}</li>
+        <li>2. Date {{today | date: 'mm/dd/yyyy'}}</li>
+        <li>3. Number {{124.1 | number:5}}</li>
+        <li>4. Lowercase {{'My very long string' | lowercase}}</li>
+        <li>5. Uppercase {{'My very long string' | uppercase}}</li>
+        <li>6. Json <pre>{{ {'text' : 'text', 'text2' : 'text2'} | json }}</pre></li>
+    </ul>
+    <hr/>
+    <table>
+        <tr>
+            <th><a href="" ng-click="sort('name')">Name</a></th>
+        </tr>
+        <tr ng-repeat="phone in phones | orderBy:sortField:reverse">
+            <td>{{phone.name}}</td>
+        </tr>
+    </table>
+</body>
+</html>
